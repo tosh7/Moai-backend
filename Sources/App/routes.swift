@@ -8,4 +8,8 @@ func routes(_ app: Application) throws {
     app.get("hello") { req async -> String in
         "Hello, world!"
     }
+
+    app.get("me") { req async -> Int in
+        0
+    }
 }
