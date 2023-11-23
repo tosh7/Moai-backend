@@ -10,6 +10,6 @@ func routes(_ app: Application) throws {
     }
 
     app.get("me") { req async -> Int in
-        0
+        1000
     }
 }
