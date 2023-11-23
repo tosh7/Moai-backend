@@ -7,10 +7,9 @@ final class AppTests: XCTestCase {
         defer { app.shutdown() }
         try await configure(app)
 
-        try app.test(.GET, "hello", afterResponse: { res in
-            XCTAssertEqual(res.status, .ok)
-            XCTAssertEqual(res.body.string, "Hello, world!")
-        })
+        let res = try await app.test(.GET, "hello")
+        XCTAssertEqual(res.status, .ok)
+        XCTAssertEqual(res.body.string, "Hello, world!")
     }
 
     func testNoPath() async throws {
@@ -18,9 +17,8 @@ final class AppTests: XCTestCase {
         defer { app.shutdown() }
         try await configure(app)
 
-        try app.test(.GET, "", afterResponse: { res in
-            XCTAssertEqual(res.status, .ok)
-            XCTAssertEqual(res.body.string, "It works!")
-        })
+        let res = try await app.test(.GET, "")
+        XCTAssertEqual(res.status, .ok)
+        XCTAssertEqual(res.body.string, "It works!")
     }
 }
